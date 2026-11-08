@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grech Consultancy – KI-Automatisierung für Schweizer KMU</title>
+<meta name="description" content="AI Automation Quick-Win: Eine konkrete Automatisierung für Ihr KMU, zum Fixpreis, in 1–2 Wochen umgesetzt. Zürich / Deutschschweiz.">
+<style>
+  :root { --ink:#14213d; --muted:#5c6b80; --accent:#d62828; --bg:#f7f8fa; --card:#fff; --line:#e3e7ee; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--ink); background:var(--bg); }
+  a { color:var(--accent); }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 20px; }
+  header { background:var(--card); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:5; }
+  header .wrap { display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .logo { font-weight:800; letter-spacing:-.02em; font-size:20px; }
+  .logo span { color:var(--accent); }
+  .lang button { border:1px solid var(--line); background:#fff; padding:4px 10px; border-radius:6px; cursor:pointer; font:inherit; font-size:14px; }
+  .lang button[aria-pressed=true] { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .hero { padding:72px 0 56px; }
+  .hero h1 { font-size:clamp(30px,5vw,48px); line-height:1.15; margin:0 0 16px; letter-spacing:-.02em; }
+  .hero p { font-size:20px; color:var(--muted); max-width:680px; margin:0 0 28px; }
+  .btn { display:inline-block; background:var(--accent); color:#fff; text-decoration:none; padding:14px 26px; border-radius:8px; font-weight:700; }
+  .btn.secondary { background:transparent; color:var(--ink); border:2px solid var(--ink); margin-left:10px; }
+  section { padding:48px 0; }
+  h2 { font-size:30px; margin:0 0 24px; letter-spacing:-.01em; }
+  .grid { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px; }
+  .card h3 { margin:0 0 8px; font-size:19px; }
+  .card p { margin:0; color:var(--muted); font-size:16px; }
+  .price { background:var(--ink); color:#fff; border-radius:16px; padding:36px; display:grid; gap:24px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+  .price .amount { font-size:34px; font-weight:800; }
+  .price ul { margin:8px 0 0; padding-left:20px; }
+  .price small { color:#b9c3d6; }
+  ol.steps { counter-reset:s; list-style:none; padding:0; display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+  ol.steps li { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; counter-increment:s; }
+  ol.steps li::before { content:counter(s); display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--accent); color:#fff; font-weight:700; margin-bottom:8px; }
+  .niches { display:flex; flex-wrap:wrap; gap:10px; }
+  .niches span { background:#fff; border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:15px; }
+  .video { aspect-ratio:16/9; background:#dfe4ec; border-radius:10px; display:grid; place-items:center; color:var(--muted); margin-bottom:12px; overflow:hidden; }
+  .video iframe, .video video { width:100%; height:100%; border:0; background:#000; }
+  details { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:10px; }
+  summary { font-weight:600; cursor:pointer; }
+  .cta { text-align:center; padding:64px 0; }
+  footer { border-top:1px solid var(--line); padding:28px 0; color:var(--muted); font-size:14px; }
+  [data-en] { display:none; }
+  html[lang=en] [data-de] { display:none; }
+  html[lang=en] [data-en] { display:revert; }
+</style>
+</head>
+<body>
+<!--
+  CONFIG — replace before going live:
+  BOOKING_URL : Cal.com / Calendly free link  (search: "__BOOKING_URL__")
+  CONTACT     : contact email                 (search: "__EMAIL__")
+  VIDEOS      : self-hosted in media/ (or a Loom/YouTube embed URL)
+  IMPRESSUM   : owner name + address          (search: "__OWNER_")
+-->
+<header>
+  <div class="wrap">
+    <div class="logo">Grech<span>.</span> Consultancy</div>
+    <div class="lang" role="group" aria-label="Sprache / Language">
+      <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero wrap">
+    <h1 data-de>Weniger Admin. Mehr Zeit für Ihre Kunden.</h1>
+    <h1 data-en>Less admin. More time for your customers.</h1>
+    <p data-de>Der <strong>AI Automation Quick-Win</strong>: Wir automatisieren eine konkrete, wiederkehrende Aufgabe in Ihrem KMU – zum Fixpreis, in 1–2 Wochen live.</p>
+    <p data-en>The <strong>AI Automation Quick-Win</strong>: we automate one concrete, repetitive task in your business – fixed price, live in 1–2 weeks.</p>
+    <a class="btn" href="__BOOKING_URL__" target="_blank" rel="noopener"><span data-de>Kostenlose 30-Min-Analyse buchen</span><span data-en>Book a free 30-min analysis</span></a>
+    <a class="btn secondary" href="#demos"><span data-de>Demos ansehen</span><span data-en>See demos</span></a>
+  </div>
+
+  <section class="wrap">
+    <h2 data-de>Typische Quick-Wins</h2>
+    <h2 data-en>Typical quick-wins</h2>
+    <div class="grid">
+      <div class="card">
+        <h3 data-de>KI-Assistent auf Ihrer Website</h3><h3 data-en>AI assistant on your website</h3>
+        <p data-de>Beantwortet Fragen zu Öffnungszeiten, Preisen und Abläufen rund um die Uhr – auf Deutsch und Englisch, nur mit Ihren Informationen.</p>
+        <p data-en>Answers questions about opening hours, prices and processes 24/7 – in German and English, using only your information.</p>
+      </div>
+      <div class="card">
+        <h3 data-de>Anfragen automatisch erfassen</h3><h3 data-en>Enquiries handled automatically</h3>
+        <p data-de>Kontaktformular oder E-Mail → sortiert, zusammengefasst und in Ihre Liste/CRM eingetragen → Kunde erhält sofort eine passende Antwort.</p>
+        <p data-en>Contact form or email → sorted, summarised and logged in your sheet/CRM → the customer gets a fitting reply instantly.</p>
+      </div>
+      <div class="card">
+        <h3 data-de>Belege & Dokumente auslesen</h3><h3 data-en>Read invoices & documents</h3>
+        <p data-de>Rechnungen, Formulare oder Bestellungen werden ausgelesen und strukturiert weitergegeben – statt abgetippt.</p>
+        <p data-en>Invoices, forms or orders are extracted and passed on as structured data – instead of being retyped.</p>
+      </div>
+      <div class="card">
+        <h3 data-de>Termine & Erinnerungen</h3><h3 data-en>Appointments & reminders</h3>
+        <p data-de>Online-Buchung mit automatischen Bestätigungen und Erinnerungen – weniger Telefon, weniger No-Shows.</p>
+        <p data-en>Online booking with automatic confirmations and reminders – fewer calls, fewer no-shows.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2 data-de>Für wen?</h2><h2 data-en>Who is it for?</h2>
+    <div class="niches">
+      <span data-de>Treuhand- & Buchhaltungsbüros</span><span data-en>Fiduciary & accounting offices</span>
+      <span data-de>Immobilienagenturen & Verwaltungen</span><span data-en>Real-estate agencies & property managers</span>
+      <span data-de>Weitere KMU mit viel Admin</span><span data-en>Other SMEs with lots of admin</span>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="price" style="margin-top:28px">
+      <div>
+        <div data-de><small>Einrichtung, einmalig, Fixpreis</small></div><div data-en><small>Setup, one-off, fixed price</small></div>
+        <div class="amount"><span data-de>ab</span><span data-en>from</span> CHF 1'500</div>
+        <ul data-de><li><strong>Starter CHF 1'500</strong>: 1 einfacher Ablauf, z. B. Auto-Antwort + Erfassung in Excel</li><li><strong>Standard CHF 2'500</strong>: 1 Ablauf mit KI, DE + EN, bis 2 Anbindungen</li><li><strong>Pro CHF 3'500</strong>: komplexer Ablauf, z. B. Belege nach Bexio/Abacus</li><li>Live in 1–2 Wochen, Umfang schriftlich vereinbart</li></ul>
+        <ul data-en><li><strong>Starter CHF 1,500</strong>: 1 simple workflow, e.g. auto-reply + logging to a spreadsheet</li><li><strong>Standard CHF 2,500</strong>: 1 AI workflow, DE + EN, up to 2 integrations</li><li><strong>Pro CHF 3,500</strong>: complex workflow, e.g. receipts into Bexio/Abacus</li><li>Live in 1–2 weeks, scope agreed in writing</li></ul>
+      </div>
+      <div>
+        <div data-de><small>Betreuung, optional, monatlich</small></div><div data-en><small>Care plan, optional, monthly</small></div>
+        <div class="amount">CHF 150–400</div>
+        <ul data-de><li>Überwachung, Fehlerbehebung, Anbindungen am Laufen halten</li><li>KI-Nutzung bis zu einem Betrag inklusive</li><li>Je nach Plan: Anpassungen und Monatsreport</li><li>Mindestlaufzeit 3 Monate, danach monatlich kündbar</li></ul>
+        <ul data-en><li>Monitoring, fixes, keeping integrations running</li><li>AI usage included up to a set amount</li><li>Depending on plan: changes and monthly report</li><li>3-month minimum, then cancel monthly</li></ul>
+      </div>
+    </div>
+    <p data-de style="color:var(--muted);font-size:15px">50 % bei Auftrag, 50 % bei Inbetriebnahme. Nicht MWST-pflichtig, kein MWST-Zuschlag. Den genauen Fixpreis erhalten Sie nach der Analyse schriftlich.</p>
+    <p data-en style="color:var(--muted);font-size:15px">50% on signing, 50% at go-live. Not VAT-registered, so no VAT is added. You receive the exact fixed price in writing after the analysis.</p>
+  </section>
+
+  <section class="wrap">
+    <h2 data-de>So läuft es ab</h2><h2 data-en>How it works</h2>
+    <ol class="steps">
+      <li data-de><strong>Analyse (30 Min, gratis)</strong><br>Wir finden die Aufgabe, die Sie am meisten Zeit kostet.</li>
+      <li data-en><strong>Analysis (30 min, free)</strong><br>We find the task that costs you the most time.</li>
+      <li data-de><strong>Fixpreis-Offerte</strong><br>Innert 24 h: Umfang, Preis, Termin – schriftlich.</li>
+      <li data-en><strong>Fixed-price proposal</strong><br>Within 24 h: scope, price, timeline – in writing.</li>
+      <li data-de><strong>Umsetzung</strong><br>In 1–2 Wochen gebaut, getestet und mit Ihnen abgenommen.</li>
+      <li data-en><strong>Build</strong><br>Built, tested and signed off with you in 1–2 weeks.</li>
+      <li data-de><strong>Live & betreut</strong><br>Optional laufender Betrieb und Verbesserungen.</li>
+      <li data-en><strong>Live & supported</strong><br>Optional ongoing operation and improvements.</li>
+    </ol>
+  </section>
+
+  <section class="wrap" id="demos">
+    <h2 data-de>Demos ansehen (2 Min)</h2><h2 data-en>Watch the demos (2 min)</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="video" data-video="media/demo1-ki-assistent-treuhand.webm"><span data-de>Video folgt</span><span data-en>Video coming soon</span></div>
+        <h3 data-de>KI-Website-Assistent (Treuhandbüro)</h3><h3 data-en>AI website assistant (fiduciary office)</h3>
+        <p data-de>Beantwortet Kundenfragen zu Fristen, Unterlagen und Preisen auf DE/EN – nur aus Ihren Infos, ohne individuelle Steuerberatung.</p>
+        <p data-en>Answers client questions on deadlines, documents and prices in DE/EN – only from your info, no individual tax advice.</p>
+      </div>
+      <div class="card">
+        <div class="video" data-video="media/demo2-anfragen-immobilien.webm"><span data-de>Video folgt</span><span data-en>Video coming soon</span></div>
+        <h3 data-de>Anfragen-Autopilot (Immobilienagentur)</h3><h3 data-en>Enquiry autopilot (real-estate agency)</h3>
+        <p data-de>Besichtigungen, Schadenmeldungen und Verkaufsanfragen: sortiert, erfasst und in Sekunden beantwortet.</p>
+        <p data-en>Viewing requests, repair reports and sale enquiries: sorted, logged and answered in seconds.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2 data-de>Häufige Fragen</h2><h2 data-en>FAQ</h2>
+    <details><summary data-de>Was passiert mit unseren Daten?</summary><summary data-en>What happens to our data?</summary>
+      <p data-de>Wir arbeiten nach dem Schweizer Datenschutzgesetz (nDSG). Wir verwenden nur die Daten, die für die Automatisierung nötig sind, und regeln das im Vertrag. Auf Wunsch setzen wir Anbieter mit Datenhaltung in der Schweiz/EU ein.</p>
+      <p data-en>We work under the Swiss Data Protection Act (nDSG). We only use the data the automation needs, and it is covered in the contract. On request we use providers with Swiss/EU data storage.</p></details>
+    <details><summary data-de>Brauchen wir neue Software?</summary><summary data-en>Do we need new software?</summary>
+      <p data-de>Meistens nicht. Wir verbinden die Tools, die Sie schon nutzen (E-Mail, Website, Excel/Google Sheets, CRM, Kalender).</p>
+      <p data-en>Usually not. We connect the tools you already use (email, website, Excel/Google Sheets, CRM, calendar).</p></details>
+    <details><summary data-de>Was kostet der Betrieb?</summary><summary data-en>What are the running costs?</summary>
+      <p data-de>Die KI- und Hosting-Kosten liegen bei typischen KMU-Volumen meist bei wenigen Franken pro Monat. Wir nennen Ihnen die Zahl in der Offerte.</p>
+      <p data-en>AI and hosting costs at typical SME volumes are usually a few francs per month. We state the figure in the proposal.</p></details>
+    <details><summary data-de>Und wenn es nicht funktioniert?</summary><summary data-en>What if it doesn't work?</summary>
+      <p data-de>Umfang und Abnahmekriterien stehen vorab schriftlich fest. Funktioniert die Lösung nicht wie vereinbart, bessern wir kostenlos nach. Klappt es dann immer noch nicht, zahlen Sie die zweite Hälfte nicht.</p>
+      <p data-en>Scope and acceptance criteria are agreed in writing up front. If the solution doesn't work as agreed, we fix it free of charge. If it still doesn't work, you don't pay the second half.</p></details>
+  </section>
+
+  <div class="cta wrap">
+    <h2 data-de>Welche Aufgabe kostet Sie jede Woche Stunden?</h2>
+    <h2 data-en>Which task costs you hours every week?</h2>
+    <a class="btn" href="__BOOKING_URL__" target="_blank" rel="noopener"><span data-de>Kostenloses Gespräch buchen</span><span data-en>Book a free call</span></a>
+    <p><span data-de>oder per E-Mail:</span><span data-en>or email:</span> <a href="mailto:__EMAIL__">__EMAIL__</a></p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>Impressum</strong> · Grech Consultancy, Inhaber __OWNER_NAME__, __OWNER_ADDRESS__ · <a href="mailto:__EMAIL__">__EMAIL__</a><br>
+    <span data-de>Datenschutz: Diese Seite setzt keine Cookies und kein Tracking ein. Beim Klick auf «Gespräch buchen» gelten die Datenschutzbestimmungen des Buchungsanbieters.</span>
+    <span data-en>Privacy: this site uses no cookies and no tracking. When you click "Book a call", the booking provider's privacy policy applies.</span>
+  </div>
+</footer>
+
+<script>
+  const setLang = (l) => {
+    document.documentElement.lang = l;
+    document.querySelectorAll("[data-set-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.setLang === l));
+    try { localStorage.setItem("lang", l); } catch {}
+  };
+  document.querySelectorAll("[data-set-lang]").forEach(b => b.onclick = () => setLang(b.dataset.setLang));
+  const q = new URLSearchParams(location.search).get("lang");
+  let saved = null; try { saved = localStorage.getItem("lang"); } catch {}
+  setLang(q || saved || ((navigator.language || "de").startsWith("en") ? "en" : "de"));
+  // embed demo videos once URLs are filled in
+  document.querySelectorAll("[data-video]").forEach(el => {
+    const u = el.dataset.video;
+    if (/\.(webm|mp4)$/.test(u)) el.innerHTML = `<video src="${u}" controls preload="metadata" playsinline title="Demo video"></video>`;
+    else if (u.startsWith("http")) el.innerHTML = `<iframe src="${u}" allowfullscreen loading="lazy" title="Demo video"></iframe>`;
+  });
+</script>
+</body>
+</html>

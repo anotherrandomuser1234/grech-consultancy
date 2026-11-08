@@ -1,0 +1,17 @@
+{
+  "name": "grech-demos",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Grech Consultancy demo automations (AI FAQ assistant, enquiry -> CRM -> auto-reply) + bilingual landing page",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node test.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1"
+  }
+}

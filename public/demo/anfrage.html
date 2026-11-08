@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo: Anfrage → Liste → Auto-Antwort</title>
+<style>
+  body { margin:0; font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; color:#222; background:#eef0f3; }
+  .banner { background:#ffe8a3; color:#5a4500; font-size:13px; text-align:center; padding:6px; }
+  .cols { display:grid; grid-template-columns:minmax(300px,1fr) minmax(380px,1.4fr); gap:18px; padding:18px; }
+  @media (max-width:900px) { .cols { grid-template-columns:1fr; } }
+  .box { background:#fff; border-radius:12px; padding:18px 20px; box-shadow:0 1px 3px #0001; }
+  h2 { margin:0 0 4px; font-size:18px; } .sub { color:#667; font-size:13px; margin-bottom:14px; }
+  label { display:block; font-size:13px; font-weight:600; margin:10px 0 4px; }
+  input, textarea { width:100%; box-sizing:border-box; padding:9px 11px; border:1px solid #ccd; border-radius:7px; font:inherit; }
+  textarea { min-height:120px; }
+  button { background:#2f6b4f; color:#fff; border:0; padding:10px 18px; border-radius:7px; font-weight:700; cursor:pointer; margin-top:12px; }
+  button.ghost { background:#fff; color:#2f6b4f; border:1px solid #2f6b4f; font-weight:600; padding:5px 10px; margin:0 6px 6px 0; font-size:13px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { text-align:left; padding:7px 6px; border-bottom:1px solid #eee; vertical-align:top; }
+  th { background:#f6f7f9; font-size:12px; text-transform:uppercase; letter-spacing:.03em; color:#556; }
+  tr.new { animation:flash 2s; } @keyframes flash { from { background:#fff3c4; } to { background:transparent; } }
+  .tag { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; background:#eef; }
+  .high { background:#ffd9d4; color:#9b1c00; } .normal { background:#e3f1e3; } .low { background:#eee; }
+  .mail { background:#fafafa; border:1px dashed #bbb; border-radius:8px; padding:12px; white-space:pre-wrap; font-size:14px; }
+  .steps { display:flex; gap:6px; flex-wrap:wrap; margin:6px 0 12px; } .steps span { background:#f0f2f5; padding:3px 9px; border-radius:6px; font-size:12px; color:#556; }
+  .steps span.on { background:#2f6b4f; color:#fff; }
+</style>
+</head>
+<body>
+<div class="banner">DEMO by Grech Consultancy — fictional agency «Immobilien Weber AG», test data only. <span id="mode"></span></div>
+<div class="cols">
+  <div class="box">
+    <h2>1 · Kontaktformular auf der Website</h2>
+    <div class="sub">So sieht es der Interessent oder Mieter. / What the customer sees.</div>
+    <div>
+      <button class="ghost" data-sample="0">Beispiel: Besichtigung</button>
+      <button class="ghost" data-sample="1">Beispiel: Heizung defekt</button>
+      <button class="ghost" data-sample="2">Example: Sell my flat</button>
+    </div>
+    <form id="f">
+      <label>Name</label><input name="name" required>
+      <label>E-Mail</label><input name="email" type="email" required>
+      <label>Telefon (optional)</label><input name="phone">
+      <label>Ihre Anfrage</label><textarea name="message" required></textarea>
+      <button>Anfrage senden</button>
+    </form>
+    <div id="replyWrap" style="display:none;margin-top:18px">
+      <h2>3 · Automatische Antwort an den Kunden</h2>
+      <div class="sub">Sofort versendet (Demo: als .eml gespeichert, nicht wirklich gesendet).</div>
+      <div class="mail" id="reply"></div>
+    </div>
+  </div>
+  <div class="box">
+    <h2>2 · Anfragen-Liste (CRM / Google Sheet)</h2>
+    <div class="sub">Was die Verwaltung sieht – automatisch sortiert und zusammengefasst. <a href="/api/leads.csv">CSV herunterladen</a> · <a href="#" id="reset">Liste leeren</a></div>
+    <div class="steps" id="steps"><span>Empfangen</span><span>KI: Kategorie & Dringlichkeit</span><span>In Liste eingetragen</span><span>Antwort versendet</span></div>
+    <table><thead><tr><th>Eingang</th><th>Kunde</th><th>Kategorie</th><th>Dringl.</th><th>Zusammenfassung / nächster Schritt</th></tr></thead><tbody id="rows"></tbody></table>
+  </div>
+</div>
+<script>
+  const SAMPLES = [
+    { name: "Laura Beispiel", email: "laura.beispiel@example.com", phone: "079 000 00 01",
+      message: "Grüezi, ich interessiere mich für die 3.5-Zimmer-Wohnung am Musterweg 8 in Winterthur-Seen (Inserat auf Homegate). Wann kann ich die Wohnung besichtigen? Ich arbeite bis 17 Uhr. Freundliche Grüsse, L. Beispiel" },
+    { name: "Marco Test", email: "marco.test@example.com", phone: "079 000 00 02",
+      message: "Guten Tag, in unserer Wohnung an der Beispielstrasse 3 in Wetzikon ist seit heute Morgen die Heizung ausgefallen, alle Radiatoren sind kalt. Wir haben ein kleines Kind. Bitte dringend melden!" },
+    { name: "John Sample", email: "john.sample@example.com", phone: "",
+      message: "Hello, we own a 4.5-room apartment in Winterthur and are thinking about selling it next year. Could you give us an idea of its market value? We speak English only, sorry! Thanks" },
+  ];
+  const f = document.getElementById("f"), rows = document.getElementById("rows"), steps = [...document.querySelectorAll("#steps span")];
+  document.querySelectorAll("[data-sample]").forEach(b => b.onclick = () => { const s = SAMPLES[b.dataset.sample]; for (const k in s) f[k].value = s[k]; });
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const CAT = { viewing_request: "Besichtigung", rental_application: "Mietbewerbung", repair_report: "Schadenmeldung", sale_valuation: "Verkauf/Bewertung", complaint: "Reklamation", job_application: "Stellenbewerbung", spam: "Spam", other: "Andere" };
+  const URG = { high: "hoch", normal: "normal", low: "tief" };
+  function render(leads, highlightFirst) {
+    rows.innerHTML = leads.map((l, i) => `<tr class="${highlightFirst && i === 0 ? "new" : ""}">
+      <td>${esc(new Date(l.received_at).toLocaleString("de-CH", { dateStyle: "short", timeStyle: "short" }))}</td>
+      <td>${esc(l.name)}<br><small>${esc(l.email)}</small></td>
+      <td><span class="tag">${esc(CAT[l.category] || l.category)}</span><br><small>${esc(l.language.toUpperCase())}${l.location ? " · " + esc(l.location) : ""}</small></td>
+      <td><span class="tag ${esc(l.urgency)}">${esc(URG[l.urgency] || l.urgency)}</span></td>
+      <td>${esc(l.summary)}<br><small>→ ${esc(l.next_step)}</small></td></tr>`).join("") || `<tr><td colspan="5" style="color:#889">Noch keine Anfragen.</td></tr>`;
+  }
+  const load = (hl) => fetch("/api/leads").then(r => r.json()).then(j => render(j.leads, hl));
+  const step = (n) => steps.forEach((s, i) => s.classList.toggle("on", i < n));
+  f.onsubmit = async (e) => {
+    e.preventDefault(); step(1);
+    const body = Object.fromEntries(new FormData(f));
+    const t = setTimeout(() => step(2), 300);
+    const r = await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const j = await r.json(); clearTimeout(t);
+    if (!r.ok) { alert(j.error || "Fehler"); step(0); return; }
+    step(3); await load(true);
+    setTimeout(() => { step(4); document.getElementById("replyWrap").style.display = "block";
+      document.getElementById("reply").textContent = `Betreff: ${j.reply.subject}\n\n${j.reply.body}`; }, 500);
+    f.reset();
+  };
+  document.getElementById("reset").onclick = (e) => { e.preventDefault(); fetch("/api/leads/reset", { method: "POST" }).then(() => load()); };
+  fetch("/api/health").then(r => r.json()).then(j => document.getElementById("mode").textContent = `[AI: ${j.mode}]`).catch(() => {});
+  load();
+</script>
+</body>
+</html>
